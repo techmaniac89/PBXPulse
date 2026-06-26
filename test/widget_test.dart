@@ -75,7 +75,7 @@ void main() {
     expect(find.text('Paused for now'), findsOneWidget);
   });
 
-  testWidgets('Home filters Signals by category', (tester) async {
+  testWidgets('Home shows cozy Signal rows', (tester) async {
     await tester.pumpWidget(
       PBXPulseApp(
         repository: MockPulseRepository(autoStart: false),
@@ -83,17 +83,52 @@ void main() {
       ),
     );
 
-    await tester.tap(find.byType(ChoiceChip).at(2));
-    await tester.pump();
-    await tester.pump(const Duration(milliseconds: 800));
-
     await tester.scrollUntilVisible(
-      find.text('Warehouse phone is back online.'),
+      find.text('Signals'),
       260,
       scrollable: find.byType(Scrollable).first,
     );
-    expect(find.text('Warehouse phone is back online.'), findsOneWidget);
+    expect(find.text('Signals'), findsOneWidget);
+    expect(find.text('All 11'), findsOneWidget);
+    expect(find.text('Activity 2'), findsOneWidget);
+    expect(find.text('Reception answered Maria.'), findsOneWidget);
+  });
+
+  testWidgets('Home Signal categories filter the feed', (tester) async {
+    await tester.pumpWidget(
+      PBXPulseApp(
+        repository: MockPulseRepository(autoStart: false),
+        settings: readySettings(),
+      ),
+    );
+
+    await tester.scrollUntilVisible(
+      find.text('Tips 1'),
+      260,
+      scrollable: find.byType(Scrollable).first,
+    );
+    await tester.tap(find.text('Tips 1'));
+    await tester.pump();
+
+    expect(
+        find.text('Support missed two calls close together.'), findsOneWidget);
     expect(find.text('Reception answered Maria.'), findsNothing);
+  });
+
+  testWidgets('Pulse tab keeps the summary view', (tester) async {
+    await tester.pumpWidget(
+      PBXPulseApp(
+        repository: MockPulseRepository(autoStart: false),
+        settings: readySettings(),
+      ),
+    );
+
+    await tester.tap(find.text('Pulse'));
+    await tester.pump();
+
+    expect(find.text('Everything is running smoothly.'), findsOneWidget);
+    expect(find.text("Things we've noticed"), findsOneWidget);
+    expect(find.text('Today'), findsOneWidget);
   });
 
   testWidgets('Calls and People search narrow their lists', (tester) async {

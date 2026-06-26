@@ -7,51 +7,67 @@ class PBXPulseTheme {
 
   static ThemeData light() {
     final scheme = ColorScheme.fromSeed(
-      seedColor: PBXColors.deepGreen,
+      seedColor: PBXColors.cozySage,
       brightness: Brightness.light,
-      surface: PBXColors.lightSurface,
+      surface: PBXColors.cozySurface,
     );
 
     return _base(
       brightness: Brightness.light,
       scheme: scheme.copyWith(
-        primary: PBXColors.deepGreen,
-        secondary: PBXColors.pulseGreen,
-        surface: PBXColors.lightSurface,
-        surfaceContainerHighest: PBXColors.lightCard,
-        error: PBXColors.attention,
+        primary: PBXColors.cozySage,
+        secondary: PBXColors.cozyCoral,
+        tertiary: PBXColors.cozyAmber,
+        surface: PBXColors.cozySurface,
+        surfaceContainerHighest: PBXColors.cozyCard,
+        error: PBXColors.cozyCoral,
       ),
-      scaffoldBackgroundColor: PBXColors.lightBackground,
-      cardColor: PBXColors.lightCard,
-      navBackground: PBXColors.lightSurface,
-      selectedLabel: PBXColors.lightTextPrimary,
-      unselectedLabel: PBXColors.lightTextMuted,
-      textPrimary: PBXColors.lightTextPrimary,
+      scaffoldBackgroundColor: PBXColors.cozyBackground,
+      cardColor: PBXColors.cozyCard,
+      navBackground: PBXColors.cozySurface,
+      selectedLabel: PBXColors.cozyTextPrimary,
+      unselectedLabel: PBXColors.cozyTextMuted,
+      textPrimary: PBXColors.cozyTextPrimary,
+      palette: const PBXPalette(
+        cardSoft: PBXColors.cozyCardSoft,
+        textSecondary: PBXColors.cozyTextSecondary,
+        textMuted: PBXColors.cozyTextMuted,
+        divider: PBXColors.cozyDivider,
+        accent: PBXColors.cozyCoral,
+      ),
     );
   }
 
   static ThemeData dark() {
     final scheme = ColorScheme.fromSeed(
-      seedColor: PBXColors.pulseGreen,
+      seedColor: PBXColors.cozyDarkSage,
       brightness: Brightness.dark,
-      surface: PBXColors.surface,
+      surface: PBXColors.cozyDarkSurface,
     );
 
     return _base(
       brightness: Brightness.dark,
       scheme: scheme.copyWith(
-        primary: PBXColors.pulseGreen,
-        secondary: PBXColors.mint,
-        surface: PBXColors.surface,
-        surfaceContainerHighest: PBXColors.card,
-        error: PBXColors.attention,
+        primary: PBXColors.cozyDarkSage,
+        secondary: PBXColors.cozyCoral,
+        tertiary: PBXColors.cozyAmber,
+        surface: PBXColors.cozyDarkSurface,
+        surfaceContainerHighest: PBXColors.cozyDarkCard,
+        error: PBXColors.cozyCoral,
       ),
-      scaffoldBackgroundColor: PBXColors.background,
-      cardColor: PBXColors.card,
-      navBackground: PBXColors.surface,
-      selectedLabel: PBXColors.textPrimary,
-      unselectedLabel: PBXColors.textMuted,
-      textPrimary: PBXColors.textPrimary,
+      scaffoldBackgroundColor: PBXColors.cozyDarkBackground,
+      cardColor: PBXColors.cozyDarkCard,
+      navBackground: PBXColors.cozyDarkSurface,
+      selectedLabel: PBXColors.cozyDarkTextPrimary,
+      unselectedLabel: PBXColors.cozyDarkTextMuted,
+      textPrimary: PBXColors.cozyDarkTextPrimary,
+      palette: const PBXPalette(
+        cardSoft: PBXColors.cozyDarkCardSoft,
+        textSecondary: PBXColors.cozyDarkTextSecondary,
+        textMuted: PBXColors.cozyDarkTextMuted,
+        divider: PBXColors.cozyDarkDivider,
+        accent: PBXColors.cozyCoral,
+      ),
     );
   }
 
@@ -64,11 +80,13 @@ class PBXPulseTheme {
     required Color selectedLabel,
     required Color unselectedLabel,
     required Color textPrimary,
+    required PBXPalette palette,
   }) {
     return ThemeData(
       useMaterial3: true,
       brightness: brightness,
       colorScheme: scheme,
+      extensions: [palette],
       scaffoldBackgroundColor: scaffoldBackgroundColor,
       cardTheme: CardThemeData(
         color: cardColor,

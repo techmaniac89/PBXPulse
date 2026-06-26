@@ -5,22 +5,32 @@ import '../pbx_colors.dart';
 import '../pbx_spacing.dart';
 
 class ConnectionChip extends StatelessWidget {
-  const ConnectionChip({required this.status, super.key});
+  const ConnectionChip({
+    required this.status,
+    this.compact = false,
+    this.icon,
+    super.key,
+  });
 
   final ConnectionStatus status;
+  final bool compact;
+  final IconData? icon;
 
   @override
   Widget build(BuildContext context) {
     return ActionChip(
-      avatar: Icon(_icon, size: 18, color: context.pbxAccent),
-      label: Text(status.label),
+      avatar: Icon(icon ?? _icon,
+          size: compact ? 17 : 18, color: context.pbxAccent),
+      label: Text(compact ? _compactLabel : status.label),
       onPressed: () => _showDetails(context),
       backgroundColor: context.pbxCardSoft,
       side: BorderSide(color: context.pbxDivider),
       labelStyle: TextStyle(
         color: Theme.of(context).colorScheme.onSurface,
         fontWeight: FontWeight.w700,
+        fontSize: compact ? 12 : null,
       ),
+      visualDensity: compact ? VisualDensity.compact : null,
       padding: const EdgeInsets.symmetric(
         horizontal: PBXSpacing.sm,
         vertical: PBXSpacing.xs,
@@ -34,6 +44,15 @@ class ConnectionChip extends StatelessWidget {
       ConnectionKind.vpn => Icons.lock_outline,
       ConnectionKind.secureRemote => Icons.public_outlined,
       ConnectionKind.reconnecting => Icons.sync_outlined,
+    };
+  }
+
+  String get _compactLabel {
+    return switch (status.kind) {
+      ConnectionKind.local => 'Local',
+      ConnectionKind.vpn => 'VPN',
+      ConnectionKind.secureRemote => 'Remote',
+      ConnectionKind.reconnecting => 'Syncing',
     };
   }
 

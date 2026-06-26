@@ -2,7 +2,7 @@ name: pbxpulse
 description: A calm mobile companion that turns PBX activity into human Signals.
 publish_to: "none"
 
-version: 0.1.0-alpha.1+1
+version: 0.1.0-alpha.3+3
 
 environment:
   sdk: ">=3.4.0 <4.0.0"

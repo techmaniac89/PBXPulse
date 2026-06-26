@@ -74,7 +74,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             _SettingsTile(
               icon: Icons.info_outline,
               title: 'About',
-              body: 'Genesis 0.1.0 alpha',
+              body: 'Genesis 0.1.0 alpha 3',
               onTap: _showAboutSheet,
             ),
           ],
@@ -120,12 +120,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 ),
                 const SizedBox(height: PBXSpacing.md),
                 _PlainNote(
-                  text: switch (widget.settings.themeMode) {
-                    ThemeMode.dark => 'Calm green-black PBXPulse default.',
-                    ThemeMode.light =>
-                      'Soft warm light theme for bright rooms.',
-                    ThemeMode.system => 'Following this device setting.',
-                  },
+                  text: _modeNote(widget.settings.themeMode),
                 ),
               ],
             );
@@ -133,6 +128,14 @@ class _SettingsScreenState extends State<SettingsScreen> {
         ),
       ],
     );
+  }
+
+  String _modeNote(ThemeMode mode) {
+    return switch (mode) {
+      ThemeMode.dark => 'Warm dark room colors with sage and coral accents.',
+      ThemeMode.light => 'Cream, sage, coral, and amber for bright rooms.',
+      ThemeMode.system => 'Brightness follows this device.',
+    };
   }
 
   void _showConnectionSheet() {
@@ -277,7 +280,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
               "PBXPulse listens to your PBX, so you don't have to. Genesis is focused on making the app feel alive before it becomes useful.",
         ),
         SizedBox(height: PBXSpacing.lg),
-        _DetailRow(label: 'Version', value: '0.1.0-alpha.1'),
+        _DetailRow(label: 'Version', value: '0.1.0-alpha.3'),
+        _DetailRow(label: 'Build', value: '3'),
         _DetailRow(label: 'Milestone', value: 'Genesis'),
         _DetailRow(label: 'Backend', value: 'Mock Signals only'),
         _DetailRow(label: 'Networking', value: 'Not yet'),
