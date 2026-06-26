@@ -1,0 +1,21 @@
+name: pbxpulse
+description: A calm mobile companion that turns PBX activity into human Signals.
+publish_to: "none"
+
+version: 0.1.0-alpha.1+1
+
+environment:
+  sdk: ">=3.4.0 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  shared_preferences: ^2.3.5
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0
+
+flutter:
+  uses-material-design: true
